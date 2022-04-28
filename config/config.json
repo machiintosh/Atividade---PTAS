@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "hikbjhms",
+    "password": "e_TFtn7277vdv0rHUjawpDw0LB4II6eW",
+    "database": "hikbjhms",
+    "host": "kesavan.db.elephantsql.com",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
