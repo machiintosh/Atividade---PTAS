@@ -1,40 +1,77 @@
 var express = require("express");
 var app = express();
-var { usuario } = require("./models")
+var { usuario, empresa } = require("./models")
 
 app.use(express.json());
 app.use(express.urlencoded({
   extended: true
 }));
 
-app.get("/:id", async function(req, res){
+//Página Inicial
+
+app.get('/', async function(req, res){
+  var pagina_inicial = "Seja bem vindo";
+  res.json(pagina_inicial);
+});
+
+//Rotas para usuários
+
+app.get("/usuarios/:id", async function(req, res){
   const resultado = await usuario.findByPk(req.params.id);
   res.json(resultado);
 });
 
-app.get("/", async function(req, res){
+app.get("/usuarios", async function(req, res){
   const resultado = await usuario.findAll();
   res.json(resultado);
 });
 
-app.post("/", function(req, res){
+app.post("/usuarios", function(req, res){
   const resultado = usuario.create(req.body);
   res.json(resultado);
 });
 
-app.put("/:id", async function(req, res){
-  const atualizar = await usuario.findByPk(req.params.id);
-  res.send(atualizar.nome = "Igor")
-
-  const resultadoSave = await atualizar.save();
-  console.log(resultadoSave)
+app.put("/usuarios/:id", async function(req, res){
+  var atualizar = await usuario.findByPk(req.params.id);
+  
+  var resultado = await atualizar.update(req.body);
+  res.json(resultado);
 })
 
-app.delete("/:id", async function(req, res){
+app.delete("/usuarios/:id", async function(req, res){
   const deletar = await usuario.findByPk(req.params.id);
   deletar.destroy();
 })
 
+//Rotas para empresas
+
+app.get("/empresas/:id", async function(req, res){
+  const resultado = await empresa.findByPk(req.params.id);
+  res.json(resultado);
+});
+
+app.get("/empresas", async function(req, res){
+  const resultado = await empresa.findAll();
+  res.json(resultado);
+});
+
+app.post("/empresas", function(req, res){
+  const resultado = empresa.create(req.body);
+  res.json(resultado);
+});
+
+app.put("/empresas/:id", async function(req, res){
+  var atualizar = await empresa.findByPk(req.params.id);
+  
+  var resultado = await atualizar.update(req.body);
+  res.json(resultado);
+})
+
+app.delete("/empresas/:id", async function(req, res){
+  const deletar = await empresa.findByPk(req.params.id);
+  deletar.destroy();
+})
+
 app.listen(3000, function(){
-  console.log("O servidor está sambando com as araras")
+  console.log("Server it's ok!")
 })
