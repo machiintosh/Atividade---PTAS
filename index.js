@@ -43,6 +43,11 @@ app.delete("/usuarios/:id", async function(req, res){
   deletar.destroy();
 })
 
+app.get("/usuarios/:id/empresa", async function(req, res){
+  const resultado = await usuario.findByPk(req.params.id, {include: "empresa"});
+  res.json(resultado.empresa)
+})
+
 //Rotas para empresas
 
 app.get("/empresas/:id", async function(req, res){
@@ -72,6 +77,12 @@ app.delete("/empresas/:id", async function(req, res){
   deletar.destroy();
 })
 
+app.get("/empresas/:id/usuarios", async function(req, res){
+  const resultado = await empresa.findByPk(req.params.id, {include: "usuarios"});
+  res.json(resultado.usuarios)
+})
+
 app.listen(3000, function(){
   console.log("Server it's ok!")
 })
+
